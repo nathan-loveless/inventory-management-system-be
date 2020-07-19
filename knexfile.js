@@ -1,30 +1,15 @@
 module.exports = {
   development: {
-    client: "pg",
-    connection: process.env.LOCAL_DB,
+    client: "sqlite3",
     useNullAsDefault: true,
-    migrations: {
-      directory: "./database/migrations",
+    connection: {
+      filename: "./database/ims.db3",
     },
-    seeds: {
-      directory: "./database/seeds",
+    pool: {
+      afterCreate: (conn, done) => {
+        conn.run("PRAGMA foreign_keys = ON", done);
+      },
     },
-  },
-  testing: {
-    client: "pg",
-    connection: process.env.LOCALDB_TESTING,
-    useNullAsDefault: true,
-    migrations: {
-      directory: "./database/migrations",
-    },
-    seeds: {
-      directory: "./database/seeds",
-    },
-  },
-  production: {
-    client: "pg",
-    connection: process.env.DATABASE_URL,
-    useNullAsDefault: true,
     migrations: {
       directory: "./database/migrations",
     },
