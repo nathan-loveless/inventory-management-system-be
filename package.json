@@ -30,7 +30,8 @@
     "helmet": "^3.21.2",
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^2.2.0",
-    "knex": "^0.20.15"
+    "knex": "^0.20.15",
+    "sqlite3": "^5.0.0"
   },
   "devDependencies": {
     "cross-env": "^7.0.2",
