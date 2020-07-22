@@ -6,7 +6,7 @@ const router = express.Router();
 router.use(express.json());
 
 router.get("/activeusers", restricted, (req, res) => {
-  Users.getActiveUsers()
+  Users.getActiveUsers("active")
     .then((users) => {
       res.status(200).json(users);
     })
@@ -18,7 +18,7 @@ router.get("/activeusers", restricted, (req, res) => {
 });
 
 router.get("/inactiveusers", restricted, (req, res) => {
-  Users.getInactiveUsers()
+  Users.getInactiveUsers("inactive")
     .then((users) => {
       res.status(200).json(users);
     })

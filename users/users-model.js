@@ -28,18 +28,18 @@ async function findPendingById(id) {
 }
 
 async function findBy(user) {
-  return db("users").where(user);
+  return db("users").where(user).first();
 }
 
-async function getActiveUsers() {
-  return db("users");
+async function getActiveUsers(status) {
+  return db("users").where("status", status);
 }
 
-async function getInactiveUsers() {
-  return db("users").where({ role });
+function getInactiveUsers(status) {
+  return db("users").where("status", status);
 }
 
-async function getPendingUsers() {
+function getPendingUsers() {
   return db("pending_approvals");
 }
 

@@ -3,7 +3,6 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const secrets = require("../config/secrets");
 const Users = require("../users/users-model");
-const usersModel = require("../users/users-model");
 
 router.post("/register", (req, res) => {
   let user = req.body;
@@ -28,23 +27,18 @@ router.post("/register", (req, res) => {
 
 router.post("/login", (req, res) => {
   let { username, password } = req.body;
+  const test = "This is right?";
 
   Users.findBy({ username })
-    .first()
     .then((user) => {
       if (user && bcrypt.compareSync(password, user.password)) {
-        const token = genToken(user, user.id);
-
-        if (user.role === "admin") {
-          user.activeUsers = Users.getActiveUsers();
-          user.inactiveUsers = Users.getInactiveUsers();
-          user.pendingUsers = Users.getPendingUsers();
-          user.isAdmin = true;
-        }
+        token = genToken(user, user.id);
         delete user.password;
-        res
-          .status(202)
-          .json({ user, message: `Welcome ${user.username}!`, token });
+        res.status(202).json({
+          user,
+          message: `Welcome ${user.username}!`,
+          token,
+        });
       } else {
         res.status(401).json({ message: "Invalid username or password" });
       }
