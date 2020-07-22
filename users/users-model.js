@@ -32,15 +32,52 @@ async function findBy(user) {
 }
 
 async function getActiveUsers(status) {
-  return db("users").where("status", status);
+  return db("users")
+    .select(
+      "username",
+      "firstName",
+      "lastName",
+      "address",
+      "city",
+      "state",
+      "zipcode",
+      "email",
+      "status",
+      "role"
+    )
+    .where("status", status);
 }
 
 function getInactiveUsers(status) {
-  return db("users").where("status", status);
+  return db("users")
+    .select(
+      "username",
+      "firstName",
+      "lastName",
+      "address",
+      "city",
+      "state",
+      "zipcode",
+      "email",
+      "status",
+      "role"
+    )
+    .where("status", status);
 }
 
 function getPendingUsers() {
-  return db("pending_approvals");
+  return db("pending_approvals").select(
+    "username",
+    "firstName",
+    "lastName",
+    "address",
+    "city",
+    "state",
+    "zipcode",
+    "email",
+    "status",
+    "role"
+  );
 }
 
 async function remove(id) {
