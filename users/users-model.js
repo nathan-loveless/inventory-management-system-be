@@ -34,6 +34,7 @@ async function findBy(user) {
 async function getActiveUsers(status) {
   return db("users")
     .select(
+      "id",
       "username",
       "firstName",
       "lastName",
@@ -51,6 +52,7 @@ async function getActiveUsers(status) {
 function getInactiveUsers(status) {
   return db("users")
     .select(
+      "id",
       "username",
       "firstName",
       "lastName",
@@ -67,6 +69,7 @@ function getInactiveUsers(status) {
 
 function getPendingUsers() {
   return db("pending_approvals").select(
+    "id",
     "username",
     "firstName",
     "lastName",
