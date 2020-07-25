@@ -27,10 +27,17 @@ router.post("/register", (req, res) => {
 
 router.post("/login", (req, res) => {
   let { username, password } = req.body;
-  const test = "This is right?";
 
-  Users.findBy({ username })
+  Users.findByUsername({ username })
     .then((user) => {
+      if (user.status === "pending") {
+        res
+          .status(401)
+          .json({
+            message:
+              "Unauthorized login, if you have registered please contact the system administrator",
+          });
+      }
       if (user && bcrypt.compareSync(password, user.password)) {
         token = genToken(user, user.id);
         delete user.password;

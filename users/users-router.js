@@ -5,32 +5,8 @@ const router = express.Router();
 
 router.use(express.json());
 
-router.get("/activeusers", restricted, (req, res) => {
-  Users.getActiveUsers("active")
-    .then((users) => {
-      res.status(200).json(users);
-    })
-    .catch((error) => {
-      res
-        .status(500)
-        .json({ message: "Internal Server Error, Error Returned: " + error });
-    });
-});
-
-router.get("/inactiveusers", restricted, (req, res) => {
-  Users.getInactiveUsers("inactive")
-    .then((users) => {
-      res.status(200).json(users);
-    })
-    .catch((error) => {
-      res
-        .status(500)
-        .json({ message: "Internal Server Error, Error Returned: " + error });
-    });
-});
-
-router.get("/pendingusers", restricted, (req, res) => {
-  Users.getPendingUsers()
+router.get("/", restricted, (req, res) => {
+  Users.getUsers()
     .then((users) => {
       res.status(200).json(users);
     })
