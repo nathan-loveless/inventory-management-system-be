@@ -21,9 +21,11 @@ router.put("/:id", restricted, (req, res) => {
   const { id } = req.params;
   const changes = req.body;
   Users.update(id, changes)
-    .then((user) => {
-      if (user) {
-        res.status(200).json(user);
+    .then((result) => {
+      if (result) {
+        Users.findById(changes.id).then((user) => {
+          res.status(200).json(user);
+        });
       } else {
         res.status(404).json({ message: "The user could not be found" });
       }

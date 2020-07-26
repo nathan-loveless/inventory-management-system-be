@@ -43,5 +43,5 @@ async function remove(id) {
 }
 
 async function update(id, changes) {
-  return db("users").where({ id }).update(changes, "*");
+  return db("users").where("id", id).update(changes);
 }
