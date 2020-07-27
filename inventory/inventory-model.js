@@ -13,7 +13,7 @@ async function add(inventory) {
   return findById(id);
 }
 
-async function getInventory(inventory) {
+async function getInventory() {
   return db("inventory");
 }
 
