@@ -26,8 +26,11 @@ exports.up = function (knex) {
     .createTable("inventory", (tbl) => {
       tbl.increments();
       tbl.text("name");
+      tbl.text("sku");
+      tbl.text("Supplier");
       tbl.integer("inStock");
       tbl.decimal("price");
+      tbl.text("status");
     });
 };
 
