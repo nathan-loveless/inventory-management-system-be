@@ -27,7 +27,7 @@ exports.up = function (knex) {
       tbl.increments();
       tbl.text("name");
       tbl.text("sku");
-      tbl.text("Supplier");
+      tbl.text("supplier");
       tbl.integer("inStock");
       tbl.decimal("price");
       tbl.text("status");
