@@ -14,6 +14,15 @@ exports.up = function (knex) {
       tbl.text("status").notNullable();
       tbl.text("role").notNullable();
     })
+    .createTable("suppliers", (tbl) => {
+      tbl.increments();
+      tbl.text("name").notNullable();
+      tbl.text("address").notNullable();
+      tbl.text("city").notNullable();
+      tbl.text("state").notNullable();
+      tbl.text("zipcode").notNullable();
+      tbl.text("code").notNullable();
+    })
     .createTable("customers", (tbl) => {
       tbl.increments();
       tbl.integer("empId").notNullable();
@@ -27,7 +36,7 @@ exports.up = function (knex) {
       tbl.increments();
       tbl.text("name");
       tbl.text("sku");
-      tbl.text("supplier");
+      tbl.integer("supplierId");
       tbl.integer("inStock");
       tbl.decimal("price");
       tbl.text("status");
@@ -35,5 +44,10 @@ exports.up = function (knex) {
 };
 
 exports.down = function (knex) {
-  return knex.schema.dropTableIfExists("inventory", "customers", "users");
+  return knex.schema.dropTableIfExists(
+    "inventory",
+    "customers",
+    "suppliers",
+    "users"
+  );
 };

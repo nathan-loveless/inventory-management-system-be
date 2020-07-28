@@ -1,4 +1,5 @@
 const db = require("../database/dbConfig");
+const knex = require("knex");
 
 module.exports = {
   add,
@@ -14,7 +15,20 @@ async function add(inventory) {
 }
 
 async function getInventory() {
-  return db("inventory");
+  "SELECT inventory.id, inventory.name, inventory.sku, suppliers.name as supplier, inventory.inStock, inventory.price, inventory.status FROM [inventory] JOIN [suppliers] WHERE inventory.supplierId = suppliers.id";
+  // );
+  return db("inventory as inv")
+    .join("suppliers as sp")
+    .select(
+      "inv.id",
+      "inv.name",
+      "inv.sku",
+      "sp.name as supplier",
+      "inv.inStock",
+      "inv.price",
+      "inv.status"
+    )
+    .whereRaw("inv.supplierId = sp.id");
 }
 
 async function findById(id) {
