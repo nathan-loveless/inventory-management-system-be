@@ -15,8 +15,6 @@ async function add(inventory) {
 }
 
 async function getInventory() {
-  "SELECT inventory.id, inventory.name, inventory.sku, suppliers.name as supplier, inventory.inStock, inventory.price, inventory.status FROM [inventory] JOIN [suppliers] WHERE inventory.supplierId = suppliers.id";
-  // );
   return db("inventory as inv")
     .join("suppliers as sp")
     .select(

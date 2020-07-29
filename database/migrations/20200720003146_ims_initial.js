@@ -32,6 +32,13 @@ exports.up = function (knex) {
       tbl.text("state").notNullable();
       tbl.text("zipcode").notNullable();
     })
+    .createTable("invoices", (tbl) => {
+      tbl.increments();
+      tbl.integer("companyId").notNullable();
+      tbl.integer("empId").notNullable();
+      tbl.text("invoiceNum").notNullable();
+      tbl.text("url").notNullable();
+    })
     .createTable("inventory", (tbl) => {
       tbl.increments();
       tbl.text("name");
@@ -46,6 +53,7 @@ exports.up = function (knex) {
 exports.down = function (knex) {
   return knex.schema.dropTableIfExists(
     "inventory",
+    "invoices",
     "customers",
     "suppliers",
     "users"
